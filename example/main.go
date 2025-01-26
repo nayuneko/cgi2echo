@@ -1,11 +1,3 @@
-# cgi2echo
-
-XREAなどCGIを使えるレンタルサーバーでGoで書いたCGIをEchoで使えるようにする
-
-## Usage
-
-main.go
-```go
 package main
 
 import (
@@ -26,22 +18,3 @@ func main() {
 		panic(err)
 	}
 }
-```
-
-```shell
-$ go build -o api.cgi example/main.go
-$ chmod +x 777 api.cgi
-```
-
-.htaccess
-```
-RewriteEngine On
-RewriteRule ^api/(.*)$ /cgi-bin/api.cgi/$1 [L]
-```
-
-nginx.conf
-```
-location /api/ {
-    rewrite ^/api/(.*)$ /cgi-bin/api.cgi/$1 last;
-}
-```
